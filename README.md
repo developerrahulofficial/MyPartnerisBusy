@@ -1,7 +1,5 @@
 # MyPartnerisBusy
 
-# Your Project Name
-
 Brief description of your project goes here.
 
 ## Getting Started
