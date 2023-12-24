@@ -73,9 +73,19 @@ Start the development server:
 
 ```bash
 python manage.py runserver
+  ```
+### Finally Update The Settings.py 
+
+TWILIO_ACCOUNT_SID = 'YOUR TWILIO ACCOUNT SID'
+TWILIO_AUTH_TOKEN = 'YOUR TWILIO AUTH_TOKEN'
+TWILIO_PHONE_NUMBER = 'YOUR TWILLIO PHONE NUMBER'
+
+### Update Your Webhook URL in myapp/views.py line 46 You can use ngrok to generate a url
+
+  status_callback='https://7264-103-212-158-183.ngrok-free.app/twilio_webhook/',
 
 
-### Finally update setting.py with your Twillio Credentials
+
  
 
 
