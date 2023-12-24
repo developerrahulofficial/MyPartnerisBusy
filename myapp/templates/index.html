@@ -1,0 +1,269 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <title>MyPartnerisBusy</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <script type="text/javascript"
+src="//media.twiliocdn.com/sdk/js/client/v1.7/twilio.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.0/lottie.min.js"></script>
+</head>
+<body>
+
+
+    <div id="container">
+        <!-- Nav Section -->
+        <div class="nav">
+    <a href="#" style="" id="logo">myPartneris<span style="color: red;">Busy.</span></a>
+    <button id="menu-toggle" class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </button>
+    <div class="menu-items">
+        <a href="#">Youtube</a>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">Github</a>
+        <a href="#">AboutMe</a>
+    </div>
+    <div class="auth"></div>
+</div>
+
+        
+        <!-- Main Text Section -->
+        <div class="maintext">  <h1 id="first-line">Check if your partner 🙎🏻‍♂️/🙍🏻‍♀️</h1>
+            <h1 id="second-line">
+        is busy with someone 😏
+        </h1>
+        </div>
+
+        <!-- main app section -->
+        <div class="mainapp">
+
+            <section class="left">
+                <img src="{% static 'images/1-removebg-preview.png' %}">
+<!--                <img src="{% static 'images/1-removebg-preview.png' %}">-->
+<!--                <img src="{% static 'images/1-removebg-preview.png' %}">-->
+<!--                <img src="{% static 'images/1-removebg-preview.png' %}">-->
+            </section>
+
+            <section class="middle">
+                <div class="person">
+                    <div class="person-details">
+                        <!-- codepen details  -->
+                        <div id="name-user">
+                            <div class="pn-select" id="js_pn-select" style="--prefix-length: 2">
+                                <!-- Selected prefix -->
+                                <button class="pn-selected-prefix" aria-label="Select phonenumber prefix" id="js_trigger-dropdown" tabindex="1">
+                                <img class="pn-selected-prefix__flag" id="js_selected-flag" src="https://flagpedia.net/data/flags/icon/36x27/nl.png" />
+                                <!-- prettier-ignore -->
+                                <svg class="pn-selected-prefix__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#081626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9" />
+                                </svg>
+                                </button>
+                                <!-- Phone number input -->
+                                <div class="pn-input">
+                                <label class="pn-input__label">Phonenumber*</label>
+                                <div class="pn-input__container">
+                                    <input class="pn-input__prefix" value="+31" type="text" name="phonenumber-prefix" id="js_number-prefix" tabindex="-1" />
+                                    <input class="pn-input__phonenumber" id="js_input-phonenumber" type="tel" name="phonenumber" pattern="\d*" value="" placeholder=" " autocomplete="nope" required max="10" tabindex="0" />
+                                    <small class="pn-input__error">
+                                    This is not a valid phone number
+                                    </small>
+                                </div>
+                                </div>
+                                <!-- Dropdown -->
+                                <div class="pn-dropdown" id="js_dropdown">
+                                <div class="pn-search">
+                                    <!-- prettier-ignore -->
+                                    <svg class="pn-search__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#103155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                    <input placeholder="Search for countries" class="pn-search__input search" type="search" id="js_search-input" autocomplete="nope" />
+                                </div>
+                                <!-- Country list -->
+                                <ul class="pn-list list" id="js_list"></ul>
+                                <div class="pn-list-item pn-list-item--no-results" style="display: none" id="js_no-results-found">
+                                    No results found
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+
+                          <form method="post" action="{% url 'make_call' %}">
+        {% csrf_token %}
+        <button type="submit">Make Call</button>
+    </form>
+                      
+                        <div id="resume">
+                             <div id="loading-animation" style="display: none; height:64px; width:64px;"></div>
+                              <p class="subheading button" id="check-button">Check</p>
+                        <p class="subheading button" id="busy" style="color: red;  display: none; margin-top:3px; align-items: center; border:none; font-size:25px" ><img style="height:50px; width:50px; margin-right: 10px;" src="{% static 'images/busy.png' %}"> <b>Busy</b></p>
+                        <p class="subheading button" id="available" style="color: green;margin-top:3px;  display: none; align-items: center; border:none; font-size:25px"><img style="height:50px; width:50px; margin-right: 10px;" src="{% static 'images/available.png' %}"> <b>Available</b></p>
+                        </div>
+                        <!-- <br>
+
+                        <p class="heading" id="carrier-details">Jaylynn Kim<br><span class="subheading">Backend Developer</span></p> -->
+
+                    </div>
+
+
+
+                </div>
+
+<!--                <div class="introduction">-->
+<!--                    <div class="intro price">-->
+<!--                             <p class="subheading">Intoduction</p>-->
+
+<!--                             <p class="heading">$50 - $250</p>-->
+<!--                    </div>-->
+<!--                    <div class="assessment price">-->
+<!--                             <p class="subheading">Assessment</p>-->
+<!--                             <div></div>-->
+<!--                             <p class="heading">$250 - $600</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+
+                <div class="qna" style="margin-top:22%;">
+                    <div class="passed price">
+                             <p class="subheading">TechStack</p>
+                             <p class="heading">Javascript, Python</p>
+                    </div>
+
+
+                    <div class="closing price">
+                             <p class="subheading">github.com/</p>
+                             <p class="heading">MyPartnerisBusy</p>
+                    </div>
+
+
+                </div>
+            </section>
+
+           <section class="bar" style="
+  position: relative; border-top: 1px solid white;
+">
+  <div class="vertical-line" style=" position: absolute;
+  top: 0;
+  left: 50%;
+  width: 12px;
+  height: 50%;
+  border-radius: 15px;
+  background: linear-gradient(to bottom, var(--primary), var(--secondary), var(--tertiary));
+"></div>
+</section>
+
+
+            <section class="right">
+                <p class="subheading right-side">Please note that this app should be used responsibly and with mutual consent in your relationship. Trust is a fundamental component of any successful partnership, and Partner Activity Checker is intended to enhance that trust, not undermine it.
+                </p>
+
+              <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="developerRahul" data-color="#FF5F5F" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+
+                <div class="devs">
+
+
+
+                <div class="backend" style="margin-top:3%">
+                    <div class="message-icon"><img src="{% static 'images/youtube.png' %}"></div>
+                    <div class="companies">
+                        <p class="heading">Developer Rahul</p>
+                        <p class="subheading">Full Stack Developer</p>
+                    </div>
+                </div>
+                
+                <img class="sqaure" src="{% static 'images/logo.png' %}" style="height: 100px; margin-left: 20px;">
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+   
+
+    <section id="hero">
+      
+    </section>
+
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js'></script>
+<script src="{% static 'script.js' %}"></script>
+
+
+    <script>
+$(document).ready(function() {
+    // Select the div element with the class "button-like-div"
+ const checkButton = document.getElementById('check-button');
+            const loadingAnimationContainer = document.getElementById('loading-animation');
+
+            // Load and configure the Lottie animation
+            const animation = lottie.loadAnimation({
+                container: loadingAnimationContainer,
+                renderer: 'svg',
+                loop: true,
+                autoplay: false, // We don't want it to play automatically
+                path: 'https://lottie.host/4bb0ec9f-d8bf-4106-9036-31221efbf432/pIPIgt0Exs.json', // Replace with your animation link
+            });
+
+    $("#resume").click(function() {
+
+            checkButton.style.display = 'none';
+
+                // Show the loading animation
+                loadingAnimationContainer.style.display = 'block';
+
+                // Start playing the Lottie animation
+                animation.play();
+
+
+
+
+        var phoneNumber = $("#js_input-phonenumber").val()
+        var phonePrefix = $("#js_number-prefix").val()
+
+        var phone = phonePrefix+phoneNumber; // Concatenates the two strings with a space in between
+
+        console.log(phone);
+        // Make an AJAX POST request to your Django view
+        $.ajax({
+            url: "{% url 'make_call' %}",  // Replace with the actual URL of your make_call view
+            method: "POST",
+            data: {
+            phone: phone
+            },
+            success: function(response) {
+                // Handle the response from the server, if needed
+                console.log("Call initiated successfully");
+                var callId = response.call_id;
+                console.log("Call ID:", callId);
+
+                  checkForDataAvailability(callId);
+            },
+            error: function(error) {
+                // Handle any errors, if they occur
+                console.error("Error initiating call:", error);
+            }
+        });
+
+    });
+
+
+
+
+
+});
+
+</script>
+
+
+
+</body>
+</html>
