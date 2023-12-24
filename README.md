@@ -11,6 +11,7 @@ These instructions will help you set up and run the project on your local machin
 - Python (3.x recommended)
 - pip (Python package installer)
 - Virtualenv (optional but recommended)
+- Twillio Account
 
 ### Installing
 
@@ -72,5 +73,9 @@ Start the development server:
 
 ```bash
 python manage.py runserver
+
+
+### Finally update setting.py with your Twillio Credentials
+ 
 
 
