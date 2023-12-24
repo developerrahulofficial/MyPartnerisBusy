@@ -23,7 +23,7 @@ These instructions will help you set up and run the project on your local machin
 2. Navigate to the project directory:
 
     ```bash
-    cd your-project
+    cd mypartnerisbusy
     ```
 
 3. Create a virtual environment (optional but recommended):
